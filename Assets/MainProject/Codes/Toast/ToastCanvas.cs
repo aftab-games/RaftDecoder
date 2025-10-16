@@ -34,7 +34,7 @@ namespace Aftab
                 GameObject toastGO = pool.Get();
                 if(toastGO.TryGetComponent<ToastPanel>(out ToastPanel toastPanel))
                 {
-                    toastPanel.ManageToastFloatingAndFadingWithMessage(message, 1);
+                    toastPanel.ManageToastFloatingAndFadingWithMessage(message, 1.5f);
                 }
                 yield return new WaitForSeconds(1.1f);
                 pool.Release(toastGO);

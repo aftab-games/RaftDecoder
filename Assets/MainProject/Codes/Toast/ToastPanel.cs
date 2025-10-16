@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Aftab
 {
@@ -10,8 +9,6 @@ namespace Aftab
         [Header("Settings:")]
         [SerializeField]
         CanvasGroup toastCanvasGroup;
-        [SerializeField]
-        private Image bgImage;
         [SerializeField]
         private TextMeshProUGUI messageTMPro;
         [SerializeField]
@@ -28,21 +25,17 @@ namespace Aftab
             StartCoroutine(FadeAndFloatImage());
             IEnumerator FadeAndFloatImage()
             {
-                //Color
-                Color currentColor = bgImage.color;
-                bgImage.color = new Color(currentColor.r, currentColor.g, currentColor.b, 0.8f);
-                currentColor = bgImage.color;
-                Color newColor = currentColor;
+                //Alpha
                 float startAlpha = 0.8f;
                 float endAlpha = 0;
                 float newAlpha;
+                //Canvasgroup
+                toastCanvasGroup.alpha = startAlpha;
                 //Position
-                Vector2 startAnchoredPos = Vector2.zero;
-                Vector2 endAnchoredPos = new Vector2(0, 300);
                 float startY = 0;
-                float endY = endAnchoredPos.y;
+                float endY = 350;
                 float newY = startY;
-                Vector2 newAnchoredPos = startAnchoredPos;
+                Vector2 newAnchoredPos = toastRectTr.anchoredPosition;
                 //Timer
                 float timer = 0f;
 
@@ -50,17 +43,12 @@ namespace Aftab
                 {
                     timer += Time.deltaTime;
                     newAlpha = Mathf.Lerp(startAlpha, endAlpha, timer / fadeDuration);
-                    newColor.a = newAlpha;
-                    bgImage.color = newColor; //new Color(currentColor.r, currentColor.g, currentColor.b, newAlpha);
+                    toastCanvasGroup.alpha = newAlpha;
                     newY = Mathf.Lerp(startY, endY, timer / fadeDuration);
                     newAnchoredPos.y = newY;
                     toastRectTr.anchoredPosition = newAnchoredPos;
                     yield return null;
                 }
-                //newColor.a = endAlpha;
-                //bgImage.color = newColor; //new Color(currentColor.r, currentColor.g, currentColor.b, endAlpha);
-                //newAnchoredPos.y = endY;
-                //toastRectTr.anchoredPosition = newAnchoredPos;
             }
         }
     }
