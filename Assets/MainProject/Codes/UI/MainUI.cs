@@ -33,6 +33,21 @@ namespace Aftab
         [SerializeField]
         private Transform stageCheckTr;
 
+        [SerializeField]
+        private GameObject manColorButtonGO;
+        [SerializeField]
+        private GameObject stageColorButtonGO;
+
+        [SerializeField]
+        private GameObject manColorButtonsHolder;
+        [SerializeField]
+        private GameObject stageColorButtonsHolder;
+
+        [SerializeField]
+        private List<Color> manColors = new List<Color>();
+        [SerializeField]
+        private List<Color> stageColors = new List<Color>();
+
         public event Action<Color> OnManColorButtonClicked, OnStageColorButtonClicked;
 
         private void Awake()
@@ -47,6 +62,7 @@ namespace Aftab
             crossButton.onClick.AddListener(()=> OnCrossButtonClicked());
             manColorTabButton.onClick.AddListener(() => { OnClickedManColorTabButton(); });
             stageColorTabButton.onClick.AddListener(() => { OnClickedStageColorTabButton(); });
+            PopulateTabButtons();
         }
 
         private void OnDisable()
@@ -89,6 +105,36 @@ namespace Aftab
         {
             manColorScrollViewGO.SetActive(false);
             stageColorScrollViewGO.SetActive(true);
+        }
+
+        private void PopulateTabButtons()
+        {
+            PopulateManColorButtons();
+            PopulateStageColorButtons();
+
+            void PopulateManColorButtons()
+            {
+                for (int i = 0; i < manColors.Count; i++)
+                {
+                    GameObject go = Instantiate(manColorButtonGO);
+                    go.transform.SetParent(manColorButtonsHolder.transform, false);
+                    go.transform.localPosition = Vector3.zero;
+                    go.GetComponent<ManColorButton>().SetButtonColor(manColors[i]);
+                    go.SetActive(true);
+                }
+            }
+
+            void PopulateStageColorButtons()
+            {
+                for (int i = 0; i < stageColors.Count; i++)
+                {
+                    GameObject go = Instantiate(stageColorButtonGO);
+                    go.transform.SetParent(stageColorButtonsHolder.transform, false);
+                    go.transform.localPosition = Vector3.zero;
+                    go.GetComponent<StageColorButton>().SetButtonColor(manColors[i]);
+                    go.SetActive(true);
+                }
+            }
         }
 
         public void ManageManColorButtonClicked(Color buttonColor)

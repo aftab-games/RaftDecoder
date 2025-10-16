@@ -6,7 +6,8 @@ namespace Aftab
 {
     public class StageColorButton : MonoBehaviour
     {
-        public Color buttonColor;
+        [SerializeField]
+        private Color buttonColor;
         private Button colorButton;
 
         private void OnEnable()
@@ -25,6 +26,12 @@ namespace Aftab
             MainUI.Instance.ManageStageColorButtonClicked(buttonColor);
             MainUI.Instance.GetStageCheckTr().SetParent(transform);
             MainUI.Instance.GetStageCheckTr().localPosition = Vector3.zero;
+        }
+
+        public void SetButtonColor(Color btnColor)
+        {
+            buttonColor = btnColor;
+            GetComponent<Image>().color = buttonColor;
         }
     }
 }

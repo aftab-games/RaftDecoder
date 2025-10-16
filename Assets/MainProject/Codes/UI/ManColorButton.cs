@@ -7,7 +7,8 @@ namespace Aftab
 {
     public class ManColorButton : MonoBehaviour
     {
-        public Color buttonColor;
+        [SerializeField]
+        private Color buttonColor;
         private Button colorButton;
 
         private void OnEnable()
@@ -26,6 +27,12 @@ namespace Aftab
             MainUI.Instance.ManageManColorButtonClicked(buttonColor);
             MainUI.Instance.GetManCheckTr().SetParent(transform);
             MainUI.Instance.GetManCheckTr().localPosition = Vector3.zero;
+        }
+
+        public void SetButtonColor(Color btnColor)
+        {
+            buttonColor = btnColor;
+            GetComponent<Image>().color = buttonColor;
         }
     }
 }
