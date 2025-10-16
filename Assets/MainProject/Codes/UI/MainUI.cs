@@ -86,6 +86,7 @@ namespace Aftab
             GameStateManager.Instance.SetGameState(GameStates.Paused);
             settingButton.gameObject.SetActive(false);
             settingPanelGO.SetActive(true);
+            OnClickedManColorTabButton();
         }
 
         private void OnCrossButtonClicked()
@@ -99,12 +100,16 @@ namespace Aftab
         {
             manColorScrollViewGO.SetActive(true);
             stageColorScrollViewGO.SetActive(false);
+            manColorTabButton.GetComponent<Image>().color = manColorScrollViewGO.GetComponent<Image>().color;
+            stageColorTabButton.GetComponent <Image>().color = Color.white;
         }
 
         private void OnClickedStageColorTabButton()
         {
             manColorScrollViewGO.SetActive(false);
             stageColorScrollViewGO.SetActive(true);
+            manColorTabButton.GetComponent<Image>().color = Color.white;
+            stageColorTabButton.GetComponent<Image>().color = stageColorScrollViewGO.GetComponent<Image>().color;
         }
 
         private void PopulateTabButtons()
@@ -131,7 +136,7 @@ namespace Aftab
                     GameObject go = Instantiate(stageColorButtonGO);
                     go.transform.SetParent(stageColorButtonsHolder.transform, false);
                     go.transform.localPosition = Vector3.zero;
-                    go.GetComponent<StageColorButton>().SetButtonColor(manColors[i]);
+                    go.GetComponent<StageColorButton>().SetButtonColor(stageColors[i]);
                     go.SetActive(true);
                 }
             }
