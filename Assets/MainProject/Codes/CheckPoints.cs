@@ -26,8 +26,7 @@ namespace Aftab
         {
             currentCheckPointIndex++;
             if (currentCheckPointIndex >= checkPointsTr.Count) currentCheckPointIndex = 0;
-            //Send message to Game Manager with current check point index
-            //Then game manager will through an event that will lead to showing a toast with index number
+            ToastCanvas.Instance.ManageToast("Passing point " + currentCheckPointIndex);
         }
 
         public Transform GetNextCheckPoint()
