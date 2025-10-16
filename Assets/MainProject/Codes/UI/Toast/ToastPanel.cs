@@ -26,7 +26,7 @@ namespace Aftab
             IEnumerator FadeAndFloatImage()
             {
                 //Alpha
-                float startAlpha = 0.8f;
+                float startAlpha = 1;
                 float endAlpha = 0;
                 float newAlpha;
                 //Canvasgroup

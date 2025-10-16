@@ -45,7 +45,7 @@ namespace Aftab
                     transformToMove.rotation = targetRotation;
                 }
 
-                while (Vector3.Distance(transformToMove.position, nextCheckPoint.position) > 0.1f)
+                while (Vector3.Distance(transformToMove.position, nextCheckPoint.position) > 0.05f)
                 {
                     transformToMove.position = Vector3.MoveTowards(
                         transformToMove.position, nextCheckPoint.position, movementSpeed * Time.deltaTime);
