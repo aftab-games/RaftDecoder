@@ -9,6 +9,8 @@ namespace Aftab
     {
         [Header("Settings:")]
         [SerializeField]
+        CanvasGroup toastCanvasGroup;
+        [SerializeField]
         private Image bgImage;
         [SerializeField]
         private TextMeshProUGUI messageTMPro;
@@ -20,6 +22,8 @@ namespace Aftab
         {
             fadeDuration = fadeTime;
             toastRectTr.anchoredPosition = Vector2.zero;
+            toastRectTr.offsetMin = new Vector2(0, toastRectTr.offsetMin.y);
+            toastRectTr.offsetMax = new Vector2(0, toastRectTr.offsetMax.y);
             messageTMPro.text = message;
             StartCoroutine(FadeAndFloatImage());
             IEnumerator FadeAndFloatImage()
@@ -53,10 +57,10 @@ namespace Aftab
                     toastRectTr.anchoredPosition = newAnchoredPos;
                     yield return null;
                 }
-                newColor.a = endAlpha;
-                bgImage.color = newColor; //new Color(currentColor.r, currentColor.g, currentColor.b, endAlpha);
-                newAnchoredPos.y = endY;
-                toastRectTr.anchoredPosition = newAnchoredPos;
+                //newColor.a = endAlpha;
+                //bgImage.color = newColor; //new Color(currentColor.r, currentColor.g, currentColor.b, endAlpha);
+                //newAnchoredPos.y = endY;
+                //toastRectTr.anchoredPosition = newAnchoredPos;
             }
         }
     }

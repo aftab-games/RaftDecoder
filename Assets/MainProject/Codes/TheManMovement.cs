@@ -74,9 +74,11 @@ namespace Aftab
                     break;
                 case GameStates.Playing:
                     //Run
+                    ManageMovement(true);
                     break;
                 case GameStates.Paused:
                     //Stand idle
+                    ManageMovement(false);
                     break;
                 default:
                     //Stand idle

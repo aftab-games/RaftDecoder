@@ -45,6 +45,7 @@ namespace Aftab
         {
             GameObject poolObject = Instantiate(toastGO);
             poolObject.transform.SetParent(transform);
+            poolObject.transform.localPosition = Vector3.zero;
             poolObject.SetActive(false);
             return poolObject;
         }
