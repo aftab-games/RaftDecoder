@@ -14,18 +14,24 @@ namespace Aftab
         {
             mainCamera = GetComponent<Camera>();
             prevScreenOrientation = Screen.orientation;
+            ManageFOV();
         }
 
         private void Update()
         {
             CheckScreenOrientationAndManageFOV();
-            Debug.Log("Screen Orientation: " + Screen.orientation);
         }
 
         private void CheckScreenOrientationAndManageFOV()
         {
             if (prevScreenOrientation == Screen.orientation) return;
-            if(Screen.orientation == ScreenOrientation.Portrait || Screen.orientation == ScreenOrientation.PortraitUpsideDown)
+            ManageFOV();
+            prevScreenOrientation = Screen.orientation;
+        }
+
+        private void ManageFOV()
+        {
+            if (Screen.orientation == ScreenOrientation.Portrait || Screen.orientation == ScreenOrientation.PortraitUpsideDown)
             {
                 mainCamera.fieldOfView = portraitFOV;
             }
@@ -33,7 +39,8 @@ namespace Aftab
             {
                 mainCamera.fieldOfView = landscapeFOV;
             }
-            prevScreenOrientation = Screen.orientation;
+            //float currentAspectRatio = (float)Screen.width / Screen.height;
+            //float verticalFOV = 2f * Mathf.Atan(Mathf.Tan(desiredHorizontalFOV * 0.5f * Mathf.Deg2Rad) / currentAspectRatio) * Mathf.Rad2Deg;
         }
     }
 }
