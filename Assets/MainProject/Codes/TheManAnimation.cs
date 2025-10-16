@@ -1,5 +1,4 @@
 using UnityEngine;
-
 namespace Aftab
 {
     public class TheManAnimation : MonoBehaviour
@@ -13,7 +12,7 @@ namespace Aftab
         private string runningStateName = "Running";
         private int runningStateHash = 2;
 
-        GameStateManager gameStateManager;
+        private GameStateManager gameStateManager;
 
         private void Start()
         {

@@ -14,7 +14,7 @@ namespace Aftab
             Instance = this;
         }
 
-        public void SetGameState(GameStates state)
+        public void SetGameState(GameStates state) //Start button-Playing, Settings-Pause, Cross-Playing
         {
             if (currentGameStates == state) return;
             currentGameStates = state;

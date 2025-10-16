@@ -5,11 +5,16 @@ namespace Aftab
 {
     public class CheckPoints : MonoBehaviour
     {
+        public static CheckPoints Instance { get; private set; }
         [Header("Settings:")]
         [SerializeField]
-        List<Transform> checkPointsTr = new List<Transform>();
-        int currentCheckPointIndex = 0;
+        private List<Transform> checkPointsTr = new List<Transform>();
+        private int currentCheckPointIndex = 0;
 
+        private void Awake()
+        {
+            Instance = this;
+        }
         public Transform GetCurrentCheckPoint()
         {
             if (checkPointsTr == null) return null;
@@ -21,6 +26,8 @@ namespace Aftab
         {
             currentCheckPointIndex++;
             if (currentCheckPointIndex >= checkPointsTr.Count) currentCheckPointIndex = 0;
+            //Send message to Game Manager with current check point index
+            //Then game manager will through an event that will lead to showing a toast with index number
         }
 
         public Transform GetNextCheckPoint()
