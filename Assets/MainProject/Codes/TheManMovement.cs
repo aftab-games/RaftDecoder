@@ -33,28 +33,33 @@ namespace Aftab
 
             IEnumerator MovementCR()
             {
-                yield return null;
-
                 Transform currenCheckPoint = CheckPoints.Instance.GetCurrentCheckPoint();
                 Transform nextCheckPoint = CheckPoints.Instance.GetNextCheckPoint();
-                Vector3 lookDirection = nextCheckPoint.position - currenCheckPoint.position;
-                lookDirection.y = 0;
-                if (lookDirection != Vector3.zero)
+                ManageRotation();
+                while (true)
                 {
-                    Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-                    transformToMove.rotation = targetRotation;
-                }
-
-                while (Vector3.Distance(transformToMove.position, nextCheckPoint.position) > 0.05f)
-                {
+                    if ((transformToMove.position - nextCheckPoint.position).sqrMagnitude < 0.0025f)
+                    {
+                        CheckPoints.Instance.SetCurrentCheckPointIndexOnArrival();
+                        currenCheckPoint = CheckPoints.Instance.GetCurrentCheckPoint();
+                        nextCheckPoint = CheckPoints.Instance.GetNextCheckPoint();
+                        ManageRotation();
+                    }
                     transformToMove.position = Vector3.MoveTowards(
                         transformToMove.position, nextCheckPoint.position, movementSpeed * Time.deltaTime);
                     yield return null;
                 }
-                transformToMove.position = nextCheckPoint.position;
-                CheckPoints.Instance.SetCurrentCheckPointIndexOnArrival();
-                yield return null;
-                ManageMovement(move); //Recursively calling the method again
+                
+                void ManageRotation()
+                {
+                    Vector3 lookDirection = nextCheckPoint.position - currenCheckPoint.position;
+                    lookDirection.y = 0;
+                    if (lookDirection != Vector3.zero)
+                    {
+                        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+                        transformToMove.rotation = targetRotation;
+                    }
+                }
             }
 
             void CleanCurrentCR()
